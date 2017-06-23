@@ -18,7 +18,7 @@ curl -X POST \
         "name": "randomTest",
         "httpMethod": "GET",
         "expectedResponse": null,
-        "host": "bizops-rna-engg1008.bizops-rna.blr1.inmobi.com",
+        "host": "<testing-host>",
         "user": "prathik.raj",
         "service": "clarity-client",
         "pullRequest": 0,
