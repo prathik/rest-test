@@ -12,7 +12,7 @@ present against a pull request then it is marked as good.
 
 ```shell
 curl -X POST \
-  http://dw1002.app.uh1.inmobi.com:8011/tc/clarity-client/ \
+  http://<host>/tc/clarity-client/ \
   -H 'content-type: application/json' \
   -d '{
         "name": "randomTest",
