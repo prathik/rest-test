@@ -148,7 +148,7 @@ public class GitHubWebHookControllerTest {
         MSTestCaseDAO msTestCaseDAO = mock(MSTestCaseDAO.class);
         Github github = mock(Github.class);
         GitHubWebHookController gitHubWebHookController = new GitHubWebHookController(github, msTestCaseDAO);
-        gitHubWebHookController.managePullRequestHook(json);
+        Assert.assertFalse(gitHubWebHookController.managePullRequestHook(json));
     }
 
     @Test(expectedExceptions = MSTestException.class, expectedExceptionsMessageRegExp = "Statuses URL not present")
@@ -173,7 +173,7 @@ public class GitHubWebHookControllerTest {
         gitHubWebHookController.managePullRequestHook(json);
     }
 
-    @Test(expectedExceptions = MSTestException.class)
+    @Test(expectedExceptions = MSTestException.class, expectedExceptionsMessageRegExp = "Get test cases exception")
     void daoExceptionOnFetchTest() throws MSTSDaoException, IOException, MSTestException {
         URL resource = getClass().getClassLoader().getResource("pullRequestOpenedEvent.json");
         byte[] encoded = Files.readAllBytes(Paths.get(resource.getPath()));
@@ -190,7 +190,7 @@ public class GitHubWebHookControllerTest {
         Assert.assertTrue(gitHubWebHookController.managePullRequestHook(json));
     }
 
-    @Test(expectedExceptions = MSTestException.class)
+    @Test(expectedExceptions = MSTestException.class, expectedExceptionsMessageRegExp = "Error on update")
     void daoExceptionOnUpdate() throws IOException, MSTestException, MSTSDaoException {
          URL resource = getClass().getClassLoader().getResource("pullRequestOpenedEvent.json");
         byte[] encoded = Files.readAllBytes(Paths.get(resource.getPath()));
@@ -238,7 +238,7 @@ public class GitHubWebHookControllerTest {
 
     @Test(expectedExceptions = MSTestException.class, expectedExceptionsMessageRegExp = "Repo name not present")
     void repoNameNullTest() throws IOException, MSTestException, MSTSDaoException {
-         URL resource = getClass().getClassLoader().getResource("repoNameTest.json");
+        URL resource = getClass().getClassLoader().getResource("repoNameTest.json");
         byte[] encoded = Files.readAllBytes(Paths.get(resource.getPath()));
         String json = new String(encoded);
 
@@ -253,6 +253,31 @@ public class GitHubWebHookControllerTest {
         doReturn(msTestCases).when(msTestCaseDAO).getTestCasesForPullRequest(
                 "public-repo", 0);
         doThrow(new MSTSDaoException("Error on update")).when(msTestCaseDAO).updateTestCase(any());
+
+        GitHubWebHookController gitHubWebHookController = new GitHubWebHookController(github, msTestCaseDAO);
+        Assert.assertTrue(gitHubWebHookController.managePullRequestHook(json));
+    }
+
+    @Test
+    void noNewTestOldTestsPresent() throws IOException, MSTSDaoException, MSTestException {
+        URL resource = getClass().getClassLoader().getResource("pullRequestOpenedEvent.json");
+        byte[] encoded = Files.readAllBytes(Paths.get(resource.getPath()));
+        String json = new String(encoded);
+
+        Github github = mock(Github.class);
+
+        MSTestCaseDAO msTestCaseDAO = mock(MSTestCaseDAO.class);
+        MSTestCase msTestCase = new MSTestCase();
+        msTestCase.setPullRequest(1);
+        msTestCase.setService("public-repo");
+        List<MSTestCase> msTestCases = new ArrayList<>();
+        List<MSTestCase> msTestCasesWithData = new ArrayList<>();
+        msTestCasesWithData.add(msTestCase);
+        doReturn(msTestCases).when(msTestCaseDAO).getTestCasesForPullRequest(
+                "public-repo", 0);
+
+        doReturn(msTestCasesWithData).when(msTestCaseDAO).getTestCasesForPullRequest("public-repo", 1);
+        doNothing().when(msTestCaseDAO).updateTestCase(any());
 
         GitHubWebHookController gitHubWebHookController = new GitHubWebHookController(github, msTestCaseDAO);
         Assert.assertTrue(gitHubWebHookController.managePullRequestHook(json));

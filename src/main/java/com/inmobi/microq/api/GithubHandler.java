@@ -4,16 +4,17 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.inmobi.microq.MSTestException;
 import com.inmobi.microq.ctrl.GitHubWebHookController;
+import com.inmobi.microq.dao.MSTSDaoException;
 import com.inmobi.microq.dao.MSTestCaseDAO;
 import com.inmobi.microq.dao.Github;
+import com.inmobi.microq.models.MSTestCase;
 import lombok.extern.slf4j.Slf4j;
+import okhttp3.OkHttpClient;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author prathik.raj
@@ -40,7 +41,8 @@ public class GithubHandler {
                 mstsApiResponse.setMessage("PR received");
                 mstsApiResponse.setCode(200);
                 log.debug("handle pr");
-                Github github = new Github();
+                OkHttpClient okHttpClient = new OkHttpClient();
+                Github github = new Github(okHttpClient);
                 MSTestCaseDAO msTestCaseDAO = new MSTestCaseDAO();
                 GitHubWebHookController gitHubWebHookController = new GitHubWebHookController(github, msTestCaseDAO);
                 gitHubWebHookController.managePullRequestHook(githubData);

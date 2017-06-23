@@ -16,6 +16,8 @@ import java.io.IOException;
 @RequiredArgsConstructor
 @Slf4j
 public class Github {
+    final OkHttpClient client;
+
     public void pendingStatus(@NonNull String url) throws IOException {
         GithubStatus githubStatus = new GithubStatus();
         githubStatus.setState("pending");
@@ -34,8 +36,6 @@ public class Github {
         ObjectMapper mapper = new ObjectMapper();
         String jsonString = mapper.writeValueAsString(githubStatus);
 
-        OkHttpClient client = new OkHttpClient();
-
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody body = RequestBody.create(mediaType, jsonString);
         Request request = new Request.Builder()
@@ -45,6 +45,7 @@ public class Github {
                 .addHeader("authorization", "Basic cHJhdGhpay5yYWo6Y2QzOTQ5YTFmYTM4MjdiNzc3MTE1ZTM3ZGQ1MWFiYmNlMzFjOGE1OQ==")
                 .build();
 
-        client.newCall(request).execute();
+        Call call = client.newCall(request);
+        call.execute();
     }
 }

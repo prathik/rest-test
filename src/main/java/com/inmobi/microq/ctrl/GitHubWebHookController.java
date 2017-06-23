@@ -60,6 +60,7 @@ public class GitHubWebHookController {
                 }
 
                 List<MSTestCase> msTestCases = null;
+                List<MSTestCase> testCasesForPr = null;
 
                 String repo = jsonNode.get("repository").get("name").asText();
                 log.debug(repo);
@@ -67,6 +68,7 @@ public class GitHubWebHookController {
                 try {
                     msTestCases = dao.getTestCasesForPullRequest(repo,
                             0);
+                    testCasesForPr = dao.getTestCasesForPullRequest(repo, pullRequest.get("number").asInt());
                     log.debug(String.valueOf(msTestCases));
                 } catch (MSTSDaoException e) {
                     GithubStatus githubStatus = new GithubStatus();
@@ -79,14 +81,27 @@ public class GitHubWebHookController {
                 }
 
                 if(msTestCases.size() == 0) {
-                    GithubStatus githubStatus = new GithubStatus();
-                    githubStatus.setState("failure");
-                    githubStatus.setDescription("New test cases for this pull request not present");
-                    githubStatus.setTargetUrl("http://dw1002.app.uh1.inmobi.com:8011/tc/" + repo + "/");
-                    githubStatus.setContext("mstest");
-                    github.updateStatus(statusUrl, githubStatus);
-                    return false;
+                    log.debug("No new test cases for this pr");
+                    if(testCasesForPr.size() == 0) {
+                        GithubStatus githubStatus = new GithubStatus();
+                        githubStatus.setState("failure");
+                        githubStatus.setDescription("New test cases for this pull request not present");
+                        githubStatus.setTargetUrl("http://dw1002.app.uh1.inmobi.com:8011/tc/" + repo + "/");
+                        githubStatus.setContext("mstest");
+                        github.updateStatus(statusUrl, githubStatus);
+                        return false;
+                    } else {
+                        log.debug("Old test cases for this pr present");
+                        GithubStatus githubStatus = new GithubStatus();
+                        githubStatus.setState("success");
+                        githubStatus.setDescription("Tests are present for this pull request");
+                        githubStatus.setTargetUrl("http://dw1002.app.uh1.inmobi.com:8011/tc/" + repo + "/");
+                        githubStatus.setContext("mstest");
+                        github.updateStatus(statusUrl, githubStatus);
+                        return true;
+                    }
                 } else {
+                    log.debug("New test cases found");
                     for(MSTestCase msTestCase: msTestCases) {
 
                         msTestCase.setPullRequest(pullRequest.get("number").asInt());

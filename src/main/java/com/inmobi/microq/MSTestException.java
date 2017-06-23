@@ -12,6 +12,6 @@ public class MSTestException extends Exception {
     }
 
     public MSTestException(Throwable e) {
-        super(e);
+        super(e.getMessage());
     }
 }

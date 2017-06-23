@@ -18,7 +18,6 @@ import java.util.List;
 public class MSTestCaseAPI {
     // TODO: Better DI?
     final MSTestCaseDAO dao = new MSTestCaseDAO();
-    final Github github = new Github();
 
     @POST
     @Path("/{service}/")
