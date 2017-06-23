@@ -8,7 +8,7 @@ When ever a pull request is raised, edited, a check is made to the service to se
 with the pull request and if it is not present then the pull request is marked as invalid. If tests are
 present against a pull request then it is marked as good.
 
-# How to create a pull request?
+# How to create a test?
 
 ```shell
 curl -X POST \
