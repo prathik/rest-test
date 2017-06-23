@@ -1,0 +1,5 @@
+*.iml
+*mysql.properties
+target/
+.idea
+.DS_Store
