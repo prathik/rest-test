@@ -1,5 +1,7 @@
 ![alt text](logo.png)
 
+[![Build Status](https://travis-ci.org/prathik/microQ.svg?branch=master)](https://travis-ci.org/prathik/microQ) [![Coverage Status](https://coveralls.io/repos/github/prathik/microQ/badge.svg?branch=master)](https://coveralls.io/github/prathik/microQ?branch=master)
+
 microQ is a Github service that sees if a particular pull request has test cases associated with it.
 
 # How it works?
