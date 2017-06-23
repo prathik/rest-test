@@ -29,3 +29,18 @@ curl -X POST \
 ```
 
 In the above case `clarity-client` is the service name. Service name is the same as your repository name.
+
+# Why?
+
+When you have systems like Jenkins or Travis that can automatically pull the Git repo and run tests when a commit
+is pushed what is the need for a system like this?
+
+The reason is simple, microQ focuses on REST based integration tests only. If you are using Travis or Jenkins you'll
+have to write code to make the HTTP calls and test whether the response matches some expected response. This would
+include code to store your test cases somewhere, read that code and then make the http calls and finally check the
+response. microQ does all that for you. All you have to do is create your test cases and expected responses, give the
+hostname to which the call needs to be made and the remaining things are taken care of.
+
+In the future releases we will also add the ability to pass javascript functions to validate the given response.
+
+You will love it!
