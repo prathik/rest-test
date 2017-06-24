@@ -1,13 +1,13 @@
-package com.inmobi.microq.ctrl;
+package com.inmobi.microq.scm.github.ctrl;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.inmobi.microq.dao.MSTSDaoException;
 import com.inmobi.microq.models.MSTestCase;
 import com.inmobi.microq.MSTestException;
-import com.inmobi.microq.dao.Github;
+import com.inmobi.microq.scm.github.dao.Github;
 import com.inmobi.microq.dao.MSTestCaseDAO;
-import com.inmobi.microq.models.GithubStatus;
+import com.inmobi.microq.scm.github.models.GithubStatus;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

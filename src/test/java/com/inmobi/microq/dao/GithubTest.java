@@ -1,6 +1,7 @@
 package com.inmobi.microq.dao;
 
-import com.inmobi.microq.models.GithubStatus;
+import com.inmobi.microq.scm.github.models.GithubStatus;
+import com.inmobi.microq.scm.github.dao.Github;
 import okhttp3.Call;
 import okhttp3.OkHttpClient;
 import org.testng.annotations.Test;

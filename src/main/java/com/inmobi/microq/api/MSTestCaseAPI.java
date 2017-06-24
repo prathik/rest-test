@@ -3,7 +3,6 @@ package com.inmobi.microq.api;
 import com.inmobi.microq.dao.MSTSDaoException;
 import com.inmobi.microq.dao.MSTestCaseDAO;
 import com.inmobi.microq.models.MSTestCase;
-import com.inmobi.microq.dao.Github;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.ws.rs.*;

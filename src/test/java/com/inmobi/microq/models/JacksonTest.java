@@ -2,6 +2,7 @@ package com.inmobi.microq.models;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.inmobi.microq.scm.github.models.GithubStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

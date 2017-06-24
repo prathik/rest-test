@@ -56,7 +56,7 @@ public class MSTestCaseDAO {
             preparedStatement.close();
             connection.close();
         } catch (SQLException | ConfigurationException e) {
-            throw new MSTSDaoException(e);
+            throw new MSTSDaoException(e.getMessage());
         }
         log.debug("fetched tc: " + msTestCases.toString());
         return msTestCases;
@@ -91,7 +91,7 @@ public class MSTestCaseDAO {
             preparedStatement.close();
             connection.close();
         } catch (SQLException | ConfigurationException e) {
-            throw new MSTSDaoException(e);
+            throw new MSTSDaoException(e.getMessage());
         }
         log.debug("fetched tc: " + msTestCases.toString());
         return msTestCases;
@@ -129,7 +129,7 @@ public class MSTestCaseDAO {
             preparedStatement.close();
             connection.close();
         } catch (SQLException | ConfigurationException e) {
-            throw new MSTSDaoException(e);
+            throw new MSTSDaoException(e.getMessage());
         }
     }
 
@@ -168,7 +168,7 @@ public class MSTestCaseDAO {
             preparedStatement.close();
             connection.close();
         } catch (SQLException | ConfigurationException e) {
-            throw new MSTSDaoException(e);
+            throw new MSTSDaoException(e.getMessage());
         }
     }
 }

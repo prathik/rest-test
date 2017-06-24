@@ -3,18 +3,15 @@ package com.inmobi.microq.api;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.inmobi.microq.MSTestException;
-import com.inmobi.microq.ctrl.GitHubWebHookController;
-import com.inmobi.microq.dao.MSTSDaoException;
+import com.inmobi.microq.scm.github.ctrl.GitHubWebHookController;
 import com.inmobi.microq.dao.MSTestCaseDAO;
-import com.inmobi.microq.dao.Github;
-import com.inmobi.microq.models.MSTestCase;
+import com.inmobi.microq.scm.github.dao.Github;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * @author prathik.raj

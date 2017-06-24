@@ -11,7 +11,4 @@ public class MSTSDaoException extends Exception {
         super(s);
     }
 
-    public MSTSDaoException(Throwable e) {
-        super(e.getMessage());
-    }
 }

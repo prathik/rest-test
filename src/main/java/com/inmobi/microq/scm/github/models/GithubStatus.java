@@ -1,4 +1,4 @@
-package com.inmobi.microq.models;
+package com.inmobi.microq.scm.github.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

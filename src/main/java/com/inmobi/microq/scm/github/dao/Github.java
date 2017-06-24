@@ -1,7 +1,7 @@
-package com.inmobi.microq.dao;
+package com.inmobi.microq.scm.github.dao;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.inmobi.microq.models.GithubStatus;
+import com.inmobi.microq.scm.github.models.GithubStatus;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
