@@ -6,4 +6,4 @@ Quick and easy way to automate tests for your REST APIs
 
 # Why?
 
-Rest Test focuses on creating and running tests for rest services extremely easy and simple. The world is moving towards REST frameworks but QA doesn't have the right tools to test rest APIs. This is where Rest Test comes in.
+Rest Test focuses on creating and running tests for rest services extremely easy. The world is moving towards REST frameworks but QA doesn't have the right tools to test rest APIs. This is where Rest Test comes in.
